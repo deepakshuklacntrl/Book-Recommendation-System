@@ -18,7 +18,7 @@ def recommend(book_name, top_n=10):
 
     matches = books[books['title'].str.lower().str.contains(book_name, na=False)]
     if matches.empty:
-        return 'Book not Found'
+        return None
 
     idx = matches.index[0]
 
@@ -33,6 +33,7 @@ selected_book = st.selectbox('Select a book', book_list)
 
 if st.button('Recommend'):
     recommendations = recommend(selected_book)
+
     if recommendations is None:
         st.error('Book Not Found!')
     else:
